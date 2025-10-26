@@ -5,15 +5,22 @@ const startBtn = document.getElementById('startBtn');
 const stopBtn = document.getElementById('stopBtn');
 const resetBtn = document.getElementById('resetBtn');
 const progressBar = document.getElementById('progressBar');
+const setCountEl = document.getElementById('setCount'); // 追加：セット数表示
 
 // ----- タイマー設定 -----
-const WORK_TIME = 25 * 60;   // 25分
-const BREAK_TIME = 5 * 60;   // 5分
+// const WORK_TIME = 25 * 60;   // 25分
+// const BREAK_TIME = 5 * 60;   // 5分
+
+// ----- タイマー設定 -----
+const WORK_TIME = 10;   // 25分
+const BREAK_TIME = 10;   // 5分
 
 let currentTime = WORK_TIME;
 let isWorkTime = true;
 let timerInterval = null;
 let endTime = null;
+
+let setCount = 1; // 追加：セット数カウント
 
 // ----- アラーム音（3秒前から鳴る） -----
 const alarmSound = new Audio('https://otologic.jp/sounds/se/pre2/Time_Signal-Beep03-1(Long).mp3');
@@ -34,6 +41,11 @@ function updateTimerDisplay() {
   document.title = `${mode} ${minutes}:${seconds}`;
 }
 
+// ----- セット数表示更新 -----
+function updateSetDisplay() {
+  setCountEl.textContent = `セット: ${setCount}`;
+}
+
 // ----- 環境音制御 -----
 function startBackgroundSound() {
   if (isWorkTime) {
@@ -47,7 +59,6 @@ function startBackgroundSound() {
 function startTimer() {
   if (timerInterval) return;
 
-  // 実時間ベースで精度向上
   const totalTime = isWorkTime ? WORK_TIME : BREAK_TIME;
   endTime = Date.now() + currentTime * 1000;
 
@@ -61,7 +72,7 @@ function startTimer() {
     // 進捗バー更新
     progressBar.style.width = (currentTime / totalTime * 100) + '%';
 
-    // 残り3秒でアラーム音開始
+    // 残り3秒でアラーム音開始（作業/休憩共通）
     if (currentTime === 3) {
       alarmSound.play().catch(() => {});
     }
@@ -83,8 +94,8 @@ function stopTimer() {
     clearInterval(timerInterval);
     timerInterval = null;
   }
-  bgSound.pause();      // BGM停止
-  bgSound.currentTime = 0; // 先頭に戻す
+  bgSound.pause();
+  bgSound.currentTime = 0;
 }
 
 // ----- タイマーリセット -----
@@ -98,7 +109,12 @@ function resetTimer() {
 // ----- 作業/休憩モード切替 -----
 function switchMode() {
   isWorkTime = !isWorkTime;
+  
+  // 休憩終了後にセット数を増加
+  if (isWorkTime) setCount++;
+
   statusEl.textContent = isWorkTime ? '作業中' : '休憩中';
+  updateSetDisplay(); // 追加：セット数表示更新
   currentTime = isWorkTime ? WORK_TIME : BREAK_TIME;
   updateTimerDisplay();
   progressBar.style.width = '100%';
@@ -108,7 +124,6 @@ function switchMode() {
   document.body.classList.toggle('break-mode');
 
   startBackgroundSound();
-
   startTimer();
 }
 
@@ -119,5 +134,6 @@ resetBtn.addEventListener('click', resetTimer);
 
 // ----- 初期表示 -----
 updateTimerDisplay();
+updateSetDisplay(); // 追加：初期セット数表示
 statusEl.textContent = '作業中';
 progressBar.style.width = '100%';
