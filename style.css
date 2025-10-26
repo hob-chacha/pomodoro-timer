@@ -1,0 +1,111 @@
+/* ====== 全体レイアウト ====== */
+body {
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  transition: background 1s ease;
+}
+
+/* モード別背景色 */
+body.work-mode {
+  background: linear-gradient(135deg, #ffe29f, #ffa99f);
+}
+body.break-mode {
+  background: linear-gradient(135deg, #a0d8f1, #70bfff);
+}
+
+/* ====== コンテナ ====== */
+.container {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 40px 60px;
+  width: 320px;
+}
+
+/* ====== タイトル ====== */
+h1 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* ====== ステータス表示 ====== */
+.status {
+  font-size: 1.1rem;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+/* ====== タイマー表示 ====== */
+.timer {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #333;
+  margin: 20px 0;
+}
+
+/* ====== 進捗バー ====== */
+.progress-container {
+  width: 100%;
+  height: 10px;
+  background: #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.progress-bar {
+  height: 100%;
+  background: #ffb347;
+  width: 100%;
+  border-radius: 5px;
+  transition: width 1s linear;
+}
+
+/* ====== ボタン群 ====== */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+button {
+  flex: 1;
+  padding: 10px 0;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #ffb347;
+  color: white;
+  transition: background 0.2s;
+}
+button:hover {
+  background-color: #ff9447;
+}
+button:active {
+  transform: scale(0.97);
+}
+
+/* ====== 下部情報 ====== */
+.info {
+  margin-top: 20px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* ====== モバイル対応 ====== */
+@media (max-width: 480px) {
+  .container {
+    width: 90%;
+    padding: 20px;
+  }
+  .timer {
+    font-size: 3rem;
+  }
+  .buttons button {
+    font-size: 0.9rem;
+    padding: 8px 0;
+  }
+}
