@@ -8,12 +8,8 @@ const progressBar = document.getElementById('progressBar');
 const setCountEl = document.getElementById('setCount'); // 追加：セット数表示
 
 // ----- タイマー設定 -----
-// const WORK_TIME = 25 * 60;   // 25分
-// const BREAK_TIME = 5 * 60;   // 5分
-
-// ----- タイマー設定 -----
-const WORK_TIME = 10;   // 25分
-const BREAK_TIME = 10;   // 5分
+const WORK_TIME = 25 * 60;   // 25分
+const BREAK_TIME = 5 * 60;   // 5分
 
 let currentTime = WORK_TIME;
 let isWorkTime = true;
