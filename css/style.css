@@ -116,3 +116,95 @@ button:active {
     padding: 8px 0;
   }
 }
+
+/* ===== モーダル ===== */
+.modal {
+  display: none; /* 初期は非表示 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 30px 20px;
+  border-radius: 12px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.modal-content input {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.modal-content button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #ffb347;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#heatmap {
+  width: 100%;
+  height: 150px; /* 適宜変更 */
+}
+
+/* ---- 上下レイアウトに変更 ---- */
+.main-container {
+  display: flex;
+  flex-direction: column;  /* 上下に積む */
+  align-items: center;
+  gap: 2rem; /* タイマーと記録の間に余白 */
+  width: 100%;
+}
+
+.timer-section,
+.record-section {
+  width: 90%;
+  max-width: 500px;
+}
+
+.record-container {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.record-container h2 {
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+
+#recordList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#recordList li {
+  background: #fff;
+  margin-bottom: 6px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  font-size: 0.9rem;
+}
